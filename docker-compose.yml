@@ -37,6 +37,7 @@ services:
     ports:
       - "8800:8800"
 
+
 #================================
 #Lancer Kafka
 #================================
@@ -48,6 +49,8 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - insa-bridge
 
   kafka:
     image: confluentinc/cp-kafka:7.5.0
@@ -61,7 +64,19 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1    
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1   
+    networks:
+      - insa-bridge
+
+  front:
+    build: ./ws_services_template/src/main/java/com/insa/fr/front
+    ports:
+      - "3000:3000"
+    depends_on:
+      - ws-template
+    networks:
+      - insa-bridge
+
 
 #renommer le réseau par defaut des services
 networks:

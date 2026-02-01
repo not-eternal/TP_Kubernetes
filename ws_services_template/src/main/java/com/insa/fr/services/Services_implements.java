@@ -12,52 +12,52 @@ import com.insa.fr.entity.Students;
 public class Services_implements implements Services_Interface {
 
     private final StudentProducer studentProducer;
+    private final StudentCache studentCache;
 
-    public Services_implements(StudentProducer studentProducer) {
+    public Services_implements(StudentProducer studentProducer, StudentCache studentCache) {
         this.studentProducer = studentProducer;
+        this.studentCache = studentCache;
     }
 
     /**
      * CREATE student
-     * → publication d’un événement Kafka
      */
     @Override
     public int createStudent(Students stud) {
         studentProducer.sendStudentCreated(stud);
-        return 1; // succès symbolique
+        return 1;
     }
 
     /**
      * GET all students
-     * → pas encore implémenté (EDA)
      */
     @Override
     public List<Students> getStudents() {
-        return Collections.emptyList();
+
+        studentProducer.ListStudent();
+
+        try {
+            Thread.sleep(500); // TP only
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        return studentCache.getStudents();
     }
 
     /**
      * GET student by id
-     * → non utilisé par le front
      */
     @Override
     public List<Students> getStudent(String id) {
         return Collections.emptyList();
     }
 
-    /**
-     * UPDATE student
-     * → non implémenté
-     */
     @Override
     public boolean updateStudent(Students stud, String id) {
         return false;
     }
 
-    /**
-     * DELETE student
-     * → non implémenté
-     */
     @Override
     public boolean deleteStudent(String id) {
         return false;

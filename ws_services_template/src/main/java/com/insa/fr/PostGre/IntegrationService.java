@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import com.insa.fr.entity.Students;
+
 
 
 @Service
@@ -22,7 +24,7 @@ public class IntegrationService {
     // ADD STUDENT
     // =========================
     @KafkaListener(topics = "AddStudent")
-    public void onAddStudent(Student student) {
+    public void onAddStudent(Students student) {
 
         studentDatabase.insert(student);
 
@@ -33,9 +35,9 @@ public class IntegrationService {
     // GET STUDENTS
     // =========================
     @KafkaListener(topics = "GetStudent")
-    public void onGetStudents() {
+    public void onGetStudents(String message) {
 
-        List<Student> students = studentDatabase.findAll();
+        List<Students> students = studentDatabase.findAll();
 
         kafkaTemplate.send("ListStudent", students);
 

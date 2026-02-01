@@ -15,15 +15,22 @@ router.get("/add", (req, res) => {
 
 // submit add
 router.post("/add", async (req, res) => {
-  await axios.post("http://ws-template:8080/students", req.body);
+  await axios.post(
+    "http://ws-template:8800/service/student/add",
+    req.body,
+    { headers: { "x-api-key": "CAFEBABE" } }
+  );
   res.redirect("/");
 });
 
 // page list
 router.get("/list", async (req, res) => {
-  // déclenche la demande via REST
-  await axios.get("http://ws-template:8080/students");
-  res.render("listStudent", { students: global.students || [] });
+  const response = await axios.get(
+    "http://ws-template:8800/service/students",
+    { headers: { "x-api-key": "CAFEBABE" } }
+  );
+  res.render("listStudent", { students: response.data });
 });
+
 
 module.exports = router;
