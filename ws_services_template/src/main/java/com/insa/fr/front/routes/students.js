@@ -15,14 +15,14 @@ router.get("/add", (req, res) => {
 
 // submit add
 router.post("/add", async (req, res) => {
-  await axios.post("http://api-rest:8080/students", req.body);
+  await axios.post("http://ws-template:8080/students", req.body);
   res.redirect("/");
 });
 
 // page list
 router.get("/list", async (req, res) => {
   // déclenche la demande via REST
-  await axios.get("http://api-rest:8080/students");
+  await axios.get("http://ws-template:8080/students");
   res.render("listStudent", { students: global.students || [] });
 });
 
