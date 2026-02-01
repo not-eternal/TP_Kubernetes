@@ -1,0 +1,6 @@
+<h2>Liste des étudiants</h2>
+<ul>
+  <% students.forEach(s => { %>
+    <li><%= s.nom %> <%= s.prenom %> - <%= s.formation %></li>
+  <% }) %>
+</ul>
