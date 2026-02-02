@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: postgres
-        image: registry.kube-system.svc.cluster.local:5000/pg-insa:1.0
+        image: localhost:5000/pg-insa:1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5432
