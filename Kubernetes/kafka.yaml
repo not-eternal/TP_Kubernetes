@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kafka
-        image: registry.kube-system.svc.cluster.local:5000/cp-kafka:7.5.0
+        image: localhost:5000/cp-kafka:7.5.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9092
