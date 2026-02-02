@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: registry.kube-system.svc.cluster.local:5000/ws_services_template:1.0
+        image: localhost:5000/ws_services_template:1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
