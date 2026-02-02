@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: registry.kube-system.svc.cluster.local:5000/demo_docker_td-front:1.0
+        image: localhost:5000/demo_docker_td-front:1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
